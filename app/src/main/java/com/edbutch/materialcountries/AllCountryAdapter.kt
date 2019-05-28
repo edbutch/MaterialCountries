@@ -49,17 +49,15 @@ class AllCountryAdapter(val layoutInflater: LayoutInflater, val context: Context
             countryFlag.loadUrl(country.flag)
             countryFlag.setBackgroundColor(0x00000000)
 
-//            val height = ((context.resources.displayMetrics.densityDpi * .3)).toInt()
-//            val width =  (context.resources.displayMetrics.widthPixels * .3).toInt()
+            val height = ((context.resources.displayMetrics.densityDpi * .3)).toInt()
+            val width =  (context.resources.displayMetrics.widthPixels * .3).toInt()
 
-            val width = (countryFlag.width * .5).toFloat()
-            val height = (countryFlag.height * .5).toFloat()
-//            countryFlag.layoutParams = LinearLayout.LayoutParams(
-//                width,
-//                (height)
-//            )
-            countryFlag.scaleX = width
-            countryFlag.scaleY = height
+
+            countryFlag.layoutParams = LinearLayout.LayoutParams(
+                width,
+                (height)
+            )
+
 
         }
     }
