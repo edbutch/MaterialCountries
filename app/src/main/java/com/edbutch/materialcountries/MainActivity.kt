@@ -1,44 +1,63 @@
 package com.edbutch.materialcountries
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.Menu
-import android.view.MenuItem
-
+import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.edbutch.materialcountries.data.RestCountriesService
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 
 import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
 
+
+    lateinit var countryAdapter: AllCountryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+
+
+        countryAdapter = AllCountryAdapter(layoutInflater, this)
+        allCountriesView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        allCountriesView.adapter = countryAdapter
+
+        allCountriesView.layoutManager = LinearLayoutManager(this)
 
 
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+
+
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl("https://restcountries.eu/rest/v2/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+
+        val apiCountries = retrofit.create(RestCountriesService::class.java)
+
+        apiCountries.getAllCountries()
+            .subscribeOn(Schedulers.io())
+            .unsubscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+
+
+                countryAdapter.setCountries(it)
+            },
+                {
+                    Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
+                })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+
+
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-}
