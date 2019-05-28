@@ -3,6 +3,7 @@ package com.edbutch.materialcountries
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.edbutch.materialcountries.data.RestCountriesService
@@ -55,6 +56,20 @@ class MainActivity : AppCompatActivity() {
                 {
                     Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
                 })
+
+        searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // filter recycler view when query submitted
+                countryAdapter!!.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                // filter recycler view when text is changed
+                countryAdapter!!.filter.filter(query)
+                return false
+            }
+        })
     }
 
 
