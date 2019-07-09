@@ -1,6 +1,6 @@
 package com.edbutch.materialcountries
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +10,12 @@ import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edbutch.materialcountries.data.Country.Country
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
 
 
-class AllCountryAdapter(val layoutInflater: LayoutInflater, val context: Context) :
+class AllCountryAdapter(val layoutInflater: LayoutInflater) :
     RecyclerView.Adapter<AllCountryAdapter.CountryViewHolder>(), Filterable {
 
     val countries: ArrayList<Country> = arrayListOf()
@@ -24,25 +27,31 @@ class AllCountryAdapter(val layoutInflater: LayoutInflater, val context: Context
 
 
     override fun getItemCount(): Int {
-        return countries.size
+        return countriesSearchList.size
     }
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
 
 
-            holder.bindModel(countriesSearchList[position])
+        holder.bindModel(countriesSearchList[position])
+
 
     }
 
     fun setCountries(data: Array<Country>) {
         countries.addAll(data)
-        countriesSearchList = countries
+        countriesSearchList.addAll(data)
         notifyDataSetChanged()
+    }
+
+    fun removeAt(position: Int) {
+        countriesSearchList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     override fun getFilter(): Filter {
         return object : Filter() {
-            override fun performFiltering(charSequence: CharSequence): Filter.FilterResults {
+            override fun performFiltering(charSequence: CharSequence): FilterResults {
                 val charString = charSequence.toString()
                 if (charString.isEmpty()) {
 
@@ -57,14 +66,17 @@ class AllCountryAdapter(val layoutInflater: LayoutInflater, val context: Context
                     }
                     countriesSearchList = filteredList
                 }
-                val filterResults = Filter.FilterResults()
+                val filterResults = FilterResults()
                 filterResults.values = countriesSearchList
                 return filterResults
             }
 
-            override fun publishResults(charSequence: CharSequence, filterResults: Filter.FilterResults) {
+            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
+
                 countriesSearchList = filterResults.values as ArrayList<Country>
                 notifyDataSetChanged()
+
+
             }
         }
     }

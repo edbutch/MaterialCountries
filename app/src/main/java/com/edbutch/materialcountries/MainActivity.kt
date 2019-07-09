@@ -1,6 +1,8 @@
 package com.edbutch.materialcountries
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -24,17 +26,39 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 
 
-        countryAdapter = AllCountryAdapter(layoutInflater, this)
+        countryAdapter = AllCountryAdapter(layoutInflater)
         allCountriesView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         allCountriesView.adapter = countryAdapter
 
         allCountriesView.layoutManager = LinearLayoutManager(this)
 
+        bottomNavigationView.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_search -> {
+                    val intent = Intent(this, SearchActivity::class.java)
+                    // start your next activity
+                    startActivity(intent)
+                    true
+
+                }
+
+                else -> false
 
 
+            }
 
+        }
+
+
+//        when(it.itemId){
+//
+//            R.id.nav_search -> {
+//                Log.e("TAG", "SEARCH")
+//            }
+//        }
 
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://restcountries.eu/rest/v2/")
@@ -48,16 +72,13 @@ class MainActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .unsubscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-
-
-
                 countryAdapter.setCountries(it)
             },
                 {
                     Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
                 })
 
-        searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // filter recycler view when query submitted
                 countryAdapter!!.filter.filter(query)
@@ -73,6 +94,5 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    }
+}
 

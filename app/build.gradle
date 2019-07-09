@@ -26,10 +26,9 @@ ext {
     roomVersion = '2.1.0-alpha06'
     archLifecycleVersion = '2.1.0-alpha04'
     androidxArchVersion = '2.0.0'
+    androidX_version = "1.1.0-alpha03"
+    material_androidX_version = "1.1.0-alpha04"
 }
-
-
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -43,7 +42,17 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
+    implementation 'com.mikepenz:materialdrawer:6.1.2'
 
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.1.1'
+
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+    implementation "androidx.appcompat:appcompat:${androidX_version}"
+    implementation "androidx.recyclerview:recyclerview:${androidX_version}"
+    implementation "androidx.annotation:annotation:${androidX_version}"
+    implementation "com.google.android.material:material:${material_androidX_version}"
 
 
     implementation 'androidx.appcompat:appcompat:1.0.2'

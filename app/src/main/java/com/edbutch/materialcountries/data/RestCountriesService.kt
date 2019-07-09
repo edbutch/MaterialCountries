@@ -4,6 +4,8 @@ import com.edbutch.materialcountries.data.Country.Country
 import com.edbutch.materialcountries.data.Country.CountryResponse
 import retrofit2.http.GET
 import io.reactivex.Observable
+import retrofit2.http.Path
+import retrofit2.http.Query
 import kotlin.collections.ArrayList
 
 //https://restcountries.eu/rest/
@@ -13,5 +15,11 @@ import kotlin.collections.ArrayList
 interface RestCountriesService {
     @GET("all")
     fun getAllCountries(): Observable<Array<Country>>
+
+
+    @GET("name/{country}")
+    fun getMovieDetails(@Path("country") country: String): Observable<Array<Country>>
+
+//    @GET("")
 
 }
