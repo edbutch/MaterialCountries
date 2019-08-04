@@ -1,4 +1,4 @@
-package com.edbutch.materialcountries.data.Country
+package com.edbutch.materialcountries.data.db.Country
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

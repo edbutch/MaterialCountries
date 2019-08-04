@@ -3,8 +3,10 @@ package com.edbutch.materialcountries
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.edbutch.materialcountries.data.Country.Country
+import com.edbutch.materialcountries.data.db.Country.Country
 import kotlinx.android.synthetic.main.activity_country.*
+
+
 
 class CountryActivity : AppCompatActivity() {
     val TAG = "CountryActivity"
@@ -44,7 +46,11 @@ class CountryActivity : AppCompatActivity() {
 //        val currencyTxt = "Currency : ${country.currencies.toString() }}"
         val currencyTxt = "Currency : ${country.currencies?.get(0)?.name }"
         countryCurrencyTxt.text = currencyTxt
+
+
     }
+
+
 
 
 }

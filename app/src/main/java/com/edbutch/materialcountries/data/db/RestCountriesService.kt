@@ -1,11 +1,9 @@
-package com.edbutch.materialcountries.data
+package com.edbutch.materialcountries.data.db
 
-import com.edbutch.materialcountries.data.Country.Country
-import com.edbutch.materialcountries.data.Country.CountryResponse
+import com.edbutch.materialcountries.data.db.Country.Country
 import retrofit2.http.GET
 import io.reactivex.Observable
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 //https://restcountries.eu/rest/
 //https://restcountries.eu/rest/v2/all

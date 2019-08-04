@@ -1,27 +1,18 @@
-package com.edbutch.materialcountries.data
+package com.edbutch.materialcountries.data.db
 
-import android.app.Activity
-import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.util.Log
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
-import javax.xml.datatype.DatatypeConstants.DAYS
 import okhttp3.CacheControl
 import java.util.concurrent.TimeUnit
-import com.google.android.gms.common.api.Api
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.create
-
-
-
 
 
 //TODO

@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.edbutch.materialcountries.data.Country.Country
-import com.edbutch.materialcountries.data.ServiceGenerator
+import com.edbutch.materialcountries.data.db.Country.Country
+import com.edbutch.materialcountries.data.db.ServiceGenerator
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment

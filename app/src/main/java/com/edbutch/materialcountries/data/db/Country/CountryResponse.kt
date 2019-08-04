@@ -1,4 +1,4 @@
-package com.edbutch.materialcountries.data.Country
+package com.edbutch.materialcountries.data.db.Country
 
 class CountryResponse {
 

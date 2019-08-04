@@ -1,14 +1,15 @@
 package com.edbutch.materialcountries
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.edbutch.materialcountries.data.RestCountriesService
+import androidx.recyclerview.widget.RecyclerView
+import com.edbutch.materialcountries.data.db.RestCountriesService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -29,11 +30,27 @@ class MainActivity : AppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 
 
-        countryAdapter = AllCountryAdapter(layoutInflater)
+
+
+
+
+
         allCountriesView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        allCountriesView.layoutManager = LinearLayoutManager(this)
+
+        countryAdapter = AllCountryAdapter(layoutInflater)
         allCountriesView.adapter = countryAdapter
 
-        allCountriesView.layoutManager = LinearLayoutManager(this)
+
+        val swipeHandler = object : SwipeToDeleteCallback(this) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val adapter = allCountriesView.adapter as AllCountryAdapter
+                adapter.favoriteAt(viewHolder.adapterPosition)
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(allCountriesView)
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -102,4 +119,7 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+
+
 
