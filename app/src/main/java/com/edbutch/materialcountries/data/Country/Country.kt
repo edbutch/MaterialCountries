@@ -1,6 +1,7 @@
 package com.edbutch.materialcountries.data.Country
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Country(@SerializedName("area")
                    val area: Double = 0.0,
@@ -49,4 +50,4 @@ data class Country(@SerializedName("area")
                    @SerializedName("latlng")
                    val latlng: List<Double>?,
                    @SerializedName("currencies")
-                   val currencies: List<CurrenciesItem>?)
+                   val currencies: List<CurrenciesItem>?) : Serializable

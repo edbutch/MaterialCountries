@@ -1,18 +1,14 @@
 package com.edbutch.materialcountries
 
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edbutch.materialcountries.data.Country.Country
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.concurrent.schedule
 
 
 class AllCountryAdapter(val layoutInflater: LayoutInflater) :
@@ -86,20 +82,30 @@ class AllCountryAdapter(val layoutInflater: LayoutInflater) :
         val countryRegion: TextView = itemView.findViewById(R.id.region)
         val countryPopulation: TextView = itemView.findViewById(R.id.population)
         val countryCapital: TextView = itemView.findViewById(R.id.capital)
-        val countryFlag: WebView = itemView.findViewById(R.id.flag)
 
         fun bindModel(country: Country) {
+
+            countryName.rootView.setOnClickListener {
+                val ctx = countryName.context
+                ctx.startActivity(Intent(ctx, CountryActivity::class.java).putExtra("COUNTRY", country))
+            }
             countryName.text = country.name
-            countryRegion.text = country.region
-            countryPopulation.text = "Population: ${country.population.toString()}"
-            countryCapital.text = "Capital: ${country.capital}"
-            countryFlag.loadUrl(country.flag)
-            countryFlag.zoomBy(20f)
-            countryFlag.setBackgroundColor(0x00000000)
+            val regionText = "Region : ${country.region}"
+            countryRegion.text = regionText
+
+            val populationText = "Population: ${country.population.toString()}"
+            countryPopulation.text = populationText
+
+            val capitalText = "Capital: ${country.capital}"
+            countryCapital.text = capitalText
+
+
         }
 
 
     }
+
+
 
 
 }

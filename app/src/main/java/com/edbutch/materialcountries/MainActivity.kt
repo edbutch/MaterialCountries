@@ -37,12 +37,19 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.nav_search -> {
-                    val intent = Intent(this, SearchActivity::class.java)
+                R.id.nav_home -> {
+//                    val intent = Intent(this, SearchActivity::class.java)
                     // start your next activity
-                    startActivity(intent)
+//                    startActivity(intent)
                     true
 
+                }
+
+                R.id.nav_favs -> {
+                    true
+                }
+                R.id.nav_game -> {
+                    true
                 }
 
                 else -> false
@@ -68,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
         val apiCountries = retrofit.create(RestCountriesService::class.java)
 
-        apiCountries.getAllCountries()
+        val result = apiCountries.getAllCountries()
             .subscribeOn(Schedulers.io())
             .unsubscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -78,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
                 })
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // filter recycler view when query submitted
                 countryAdapter!!.filter.filter(query)

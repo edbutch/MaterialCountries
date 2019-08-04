@@ -1,6 +1,7 @@
 package com.edbutch.materialcountries.data.Country
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class LanguagesItem(@SerializedName("nativeName")
                          val nativeName: String = "",
@@ -9,4 +10,4 @@ data class LanguagesItem(@SerializedName("nativeName")
                          @SerializedName("name")
                          val name: String = "",
                          @SerializedName("iso639_1")
-                         val iso1: String = "")
+                         val iso1: String = ""): Serializable

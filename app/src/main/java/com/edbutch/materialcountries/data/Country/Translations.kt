@@ -1,6 +1,7 @@
 package com.edbutch.materialcountries.data.Country
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Translations(@SerializedName("br")
                         val br: String = "",
@@ -21,4 +22,4 @@ data class Translations(@SerializedName("br")
                         @SerializedName("es")
                         val es: String = "",
                         @SerializedName("nl")
-                        val nl: String = "")
+                        val nl: String = ""): Serializable
