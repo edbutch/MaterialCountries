@@ -42,6 +42,9 @@
         </activity>
         <activity android:name=".CountryActivity">
         </activity>
+        <activity android:name=".FavoritesActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".SearchActivity"
                   android:windowSoftInputMode="adjustNothing">
     </activity>

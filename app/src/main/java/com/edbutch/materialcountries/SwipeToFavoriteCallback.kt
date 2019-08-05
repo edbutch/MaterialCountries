@@ -16,7 +16,7 @@ abstract class SwipeToFavoriteCallback(context: Context) : ItemTouchHelper.Simpl
     private val intrinsicWidth = favIcon!!.intrinsicWidth
     private val intrinsicHeight = favIcon!!.intrinsicHeight
     private val background = ColorDrawable()
-    private val backgroundColor = Color.parseColor("#f44336")
+    private val backgroundColor = Color.parseColor("#FFC0CB")
     private val clearPaint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
 
 

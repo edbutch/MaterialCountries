@@ -5,6 +5,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.get
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,11 +32,6 @@ class MainActivity : AppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 
 
-
-
-
-
-
         allCountriesView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         allCountriesView.layoutManager = LinearLayoutManager(this)
 
@@ -53,6 +49,8 @@ class MainActivity : AppCompatActivity() {
         itemTouchHelper.attachToRecyclerView(allCountriesView)
 
 
+
+        bottomNavigationView.menu.get(0).isChecked = true
         bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_home -> {
@@ -64,6 +62,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_favs -> {
+                    displayActivity(FavoritesActivity::class.java)
                     true
                 }
                 R.id.nav_map -> {

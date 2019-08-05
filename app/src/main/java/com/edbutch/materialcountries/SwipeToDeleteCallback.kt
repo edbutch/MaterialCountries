@@ -12,7 +12,7 @@ import kotlin.concurrent.schedule
 abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
 
-    private val favIcon = ContextCompat.getDrawable(context, R.drawable.ic_action_favorite)
+    private val favIcon = ContextCompat.getDrawable(context, R.drawable.ic_action_delete)
     private val intrinsicWidth = favIcon!!.intrinsicWidth
     private val intrinsicHeight = favIcon!!.intrinsicHeight
     private val background = ColorDrawable()

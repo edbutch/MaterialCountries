@@ -17,6 +17,7 @@ import io.reactivex.schedulers.Schedulers
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
+
     private lateinit var mMap: GoogleMap
     private lateinit var serviceGenerator: ServiceGenerator
 
@@ -49,7 +50,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
 
-        //TODO It's set to eu countries. Do what you want here
+        supportActionBar?.title = "Explore the EU"
+        //TODO It's set to eu favorites. Do what you want here
         //We need a bottom bar to return to the main  activity too, or we could use a back button on the home
 
         val result = serviceGenerator.api().getEUCountries()
