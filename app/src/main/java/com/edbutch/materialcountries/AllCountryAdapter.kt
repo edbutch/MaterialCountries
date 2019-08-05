@@ -22,7 +22,7 @@ class AllCountryAdapter(val layoutInflater: LayoutInflater) :
     RecyclerView.Adapter<AllCountryAdapter.CountryViewHolder>(), Filterable {
     val TAG = "AllCountryAdapter"
 
-    private val savingMutex = ReentrantLock()
+    private val mutex = ReentrantLock()
 
 
     val instance =
@@ -54,10 +54,6 @@ class AllCountryAdapter(val layoutInflater: LayoutInflater) :
         notifyDataSetChanged()
     }
 
-    fun removeAt(position: Int) {
-        countriesSearchList.removeAt(position)
-        notifyItemRemoved(position)
-    }
 
     override fun getFilter(): Filter {
         return object : Filter() {
@@ -92,15 +88,26 @@ class AllCountryAdapter(val layoutInflater: LayoutInflater) :
     }
 
 
-    fun favoriteAt(adapterPosition: Int) {
+    fun removeAt(position: Int) {
+        thread(start = true){
+            synchronized(mutex){
+                instance.favoritesDAO().deleteFavorite(convertCountryToFavorite(countriesSearchList[position]))
+            }
+        }
+        countriesSearchList.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+
+    fun favoriteAt(position: Int) {
 
         notifyDataSetChanged()
-        Log.e("FavoriteAt", "Adding ${countriesSearchList[adapterPosition].name} to Favorites")
+        Log.e("FavoriteAt", "Adding ${countriesSearchList[position].name} to Favorites")
 
 
         thread(start = true) {
-            synchronized(savingMutex) {
-                instance.favoritesDAO().insertFavorite(convertCountryToFavorite(countriesSearchList[adapterPosition]))
+            synchronized(mutex) {
+                instance.favoritesDAO().insertFavorite(convertCountryToFavorite(countriesSearchList[position]))
 
 
                 val favs = instance.favoritesDAO().getFavorites()

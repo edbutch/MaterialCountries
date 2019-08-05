@@ -51,7 +51,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         //TODO It's set to eu countries. Do what you want here
         //We need a bottom bar to return to the main  activity too, or we could use a back button on the home
-        
+
         val result = serviceGenerator.api().getEUCountries()
             .subscribeOn(Schedulers.io())
             .unsubscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())

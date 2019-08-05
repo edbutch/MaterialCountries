@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import kotlin.concurrent.schedule
 
-abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+abstract class SwipeToFavoriteCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
 
     private val favIcon = ContextCompat.getDrawable(context, R.drawable.ic_action_favorite)
