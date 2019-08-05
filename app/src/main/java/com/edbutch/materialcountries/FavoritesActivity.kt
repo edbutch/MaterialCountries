@@ -28,9 +28,7 @@ class FavoritesActivity : AppCompatActivity() {
 
 
 
-        //
-
-
+        
 
         allCountriesView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         allCountriesView.layoutManager = LinearLayoutManager(this)

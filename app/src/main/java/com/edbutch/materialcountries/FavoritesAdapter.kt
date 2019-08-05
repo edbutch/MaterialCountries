@@ -108,7 +108,7 @@ class FavoritesAdapter(val layoutInflater: LayoutInflater) :
 
             countryName.rootView.setOnClickListener {
                 val ctx = countryName.context
-                ctx.startActivity(Intent(ctx, CountryActivity::class.java).putExtra("Favorite", favorite))
+                ctx.startActivity(Intent(ctx, CountryActivity::class.java).putExtra("FAVORITE", favorite))
             }
             countryName.text = favorite.name
             val regionText = "Region : ${favorite.region}"

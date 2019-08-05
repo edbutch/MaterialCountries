@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.edbutch.materialcountries.data.api.Country.Country
+import com.edbutch.materialcountries.data.db.Favorite
 import kotlinx.android.synthetic.main.activity_country.*
 
 
@@ -21,7 +22,12 @@ class CountryActivity : AppCompatActivity() {
             setCountryView(country)
 
         }
+        intent?.getSerializableExtra("FAVORITE")?.let {
+            val favorite = it as Favorite
+            setFavoriteView(favorite)
+        }
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -49,6 +55,26 @@ class CountryActivity : AppCompatActivity() {
 
 
     }
+
+    private fun setFavoriteView(favorite: Favorite) {
+
+        supportActionBar?.title = favorite.name
+        countryNameTxt.text = favorite.name
+        val capital = "Capital : ${favorite.capital}"
+        countryCapitalTxt.text = capital
+
+        val countryRegion = "Region : ${favorite.region}"
+        countryRegionTxt.text = countryRegion
+        val countrySubRegion = "Sub Region : ${favorite.subregion}"
+
+        countrySubRegionTxt.text = countrySubRegion
+
+//        val currencyTxt = "Currency : ${country.currencies.toString() }}"
+        val currencyTxt = "Currency : ${favorite.currencies }"
+        countryCurrencyTxt.text = currencyTxt
+
+    }
+
 
 
 
