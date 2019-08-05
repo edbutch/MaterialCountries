@@ -1,6 +1,6 @@
-package com.edbutch.materialcountries.data.db
+package com.edbutch.materialcountries.data.api
 
-import com.edbutch.materialcountries.data.db.Country.Country
+import com.edbutch.materialcountries.data.api.Country.Country
 import retrofit2.http.GET
 import io.reactivex.Observable
 import retrofit2.http.Path

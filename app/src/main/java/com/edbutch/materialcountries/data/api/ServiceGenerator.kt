@@ -1,4 +1,4 @@
-package com.edbutch.materialcountries.data.db
+package com.edbutch.materialcountries.data.api
 
 import android.content.Context
 import android.net.ConnectivityManager

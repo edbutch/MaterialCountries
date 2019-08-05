@@ -1,5 +1,7 @@
-package com.edbutch.materialcountries.data.db.Country
+package com.edbutch.materialcountries.data.api.Country
 
+import com.edbutch.materialcountries.data.db.Favorite
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -51,3 +53,5 @@ data class Country(@SerializedName("area")
                    val latlng: List<Double>?,
                    @SerializedName("currencies")
                    val currencies: List<CurrenciesItem>?) : Serializable
+
+

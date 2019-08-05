@@ -1,12 +1,16 @@
-package com.edbutch.materialcountries.data.api
+package com.edbutch.materialcountries.data.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.edbutch.materialcountries.data.api.Country.Country
+import com.google.gson.Gson
 import java.io.Serializable
 
 @Entity
 data class Favorite(
-    @PrimaryKey(autoGenerate = false) var pKey: Int,
+
+    @PrimaryKey(autoGenerate = true)
+    var pKey: Int = 0 ,
 
     @ColumnInfo(name = "area")
     val area: Double = 0.0,
@@ -45,3 +49,4 @@ data class Favorite(
     @ColumnInfo(name = "currencies")
     val currencies: String
 ) : Serializable
+

@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.edbutch.materialcountries.data.db.RestCountriesService
+import com.edbutch.materialcountries.data.api.RestCountriesService
+import com.edbutch.materialcountries.extentions.displayActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -65,7 +66,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_favs -> {
                     true
                 }
-                R.id.nav_game -> {
+                R.id.nav_map -> {
+                    displayActivity(MapsActivity::class.java)
                     true
                 }
 

@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.edbutch.materialcountries.data.db.Country.Country
-import com.edbutch.materialcountries.data.db.ServiceGenerator
+import com.edbutch.materialcountries.data.api.Country.Country
+import com.edbutch.materialcountries.data.api.ServiceGenerator
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -48,6 +48,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
 
+
+        //TODO It's set to eu countries. Do what you want here
+        //We need a bottom bar to return to the main  activity too, or we could use a back button on the home
+        
         val result = serviceGenerator.api().getEUCountries()
             .subscribeOn(Schedulers.io())
             .unsubscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread())

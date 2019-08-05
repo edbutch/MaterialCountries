@@ -3,7 +3,7 @@ package com.edbutch.materialcountries
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.edbutch.materialcountries.data.db.Country.Country
+import com.edbutch.materialcountries.data.api.Country.Country
 import kotlinx.android.synthetic.main.activity_country.*
 
 

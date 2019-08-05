@@ -9,11 +9,24 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.edbutch.materialcountries.data.db.Country.Country
+import androidx.room.Room
+import com.edbutch.materialcountries.data.api.Country.Country
+import com.edbutch.materialcountries.data.db.AppDatabase
+import com.edbutch.materialcountries.data.db.Favorite
+import com.google.gson.Gson
+import java.util.concurrent.locks.ReentrantLock
+import kotlin.concurrent.thread
 
 
 class AllCountryAdapter(val layoutInflater: LayoutInflater) :
     RecyclerView.Adapter<AllCountryAdapter.CountryViewHolder>(), Filterable {
+    val TAG = "AllCountryAdapter"
+
+    private val savingMutex = ReentrantLock()
+
+
+    val instance =
+        Room.databaseBuilder(layoutInflater.context.applicationContext, AppDatabase::class.java, "countriesDB").build()
 
     val countries: ArrayList<Country> = arrayListOf()
     var countriesSearchList: ArrayList<Country> = arrayListOf()
@@ -79,11 +92,28 @@ class AllCountryAdapter(val layoutInflater: LayoutInflater) :
     }
 
 
-
     fun favoriteAt(adapterPosition: Int) {
 
         notifyDataSetChanged()
         Log.e("FavoriteAt", "Adding ${countriesSearchList[adapterPosition].name} to Favorites")
+
+
+        thread(start = true) {
+            synchronized(savingMutex) {
+                instance.favoritesDAO().insertFavorite(convertCountryToFavorite(countriesSearchList[adapterPosition]))
+
+
+                val favs = instance.favoritesDAO().getFavorites()
+
+                favs.forEach {
+                    Log.e(TAG, it.name)
+
+                }
+                Log.e(TAG, "FAVORITE SIZE ${favs.size}")
+            }
+        }
+
+
     }
 
     inner class CountryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -114,7 +144,25 @@ class AllCountryAdapter(val layoutInflater: LayoutInflater) :
 
     }
 
-
+    fun convertCountryToFavorite(country: Country): Favorite {
+        val languages = Gson().toJson(country.languages)
+        val currencies = Gson().toJson(country.currencies)
+        return Favorite(
+            pKey = country.numericCode.toInt(),
+            area = country.area,
+            nativeName = country.nativeName,
+            capital = country.capital,
+            flag = country.flag,
+            languages = languages,
+            borders = country.borders.toString(),
+            subregion = country.subregion,
+            population = country.population,
+            numericCode = country.numericCode,
+            name = country.name,
+            region = country.region,
+            currencies = currencies
+        )
+    }
 
 
 }

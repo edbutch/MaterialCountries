@@ -7,12 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button
 import android.widget.TextView;
+import androidx.room.Room
+import com.edbutch.materialcountries.data.db.AppDatabase
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
 class InfoWindowAdapter(val context: Context) : GoogleMap.InfoWindowAdapter {
-
 
 
     override fun getInfoWindow(marker: Marker?): View? {

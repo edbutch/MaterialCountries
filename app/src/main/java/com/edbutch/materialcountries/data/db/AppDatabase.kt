@@ -1,4 +1,4 @@
-package com.edbutch.materialcountries.data.api
+package com.edbutch.materialcountries.data.db
 
 import android.content.Context
 import androidx.room.*
